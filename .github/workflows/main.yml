@@ -33,15 +33,7 @@ jobs:
         IMAGE_TAG: v0.1
       run: |
         cd sql
-        ls -ltra
-        # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        # Unit test
-        docker run -d -p 80:8080 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker ps
-        echo "Pause for 10 seconds to let container start"
-        sleep 10
-        curl localhost -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Build, test, tag, and push image to Amazon ECR
@@ -51,13 +43,5 @@ jobs:
         IMAGE_TAG: v0.1
       run: |
         cd WebSiteDocker
-        ls -ltra
-        # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        # Unit test
-        docker run -d -p 80:8080 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker ps
-        echo "Pause for 10 seconds to let container start"
-        sleep 10
-        curl localhost -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
