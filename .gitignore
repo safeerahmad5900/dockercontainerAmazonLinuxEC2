@@ -4,7 +4,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-
+*Assignment1-Clo835-dev*
 # Crash log files
 crash.log
 
