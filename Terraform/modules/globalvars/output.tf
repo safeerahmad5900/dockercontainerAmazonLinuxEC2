@@ -6,7 +6,6 @@ output "default_tags" {
   }
 }
 
-
 # Prefix to for resources
 output "prefix" {
   value     = "Assignment1-Clo835"

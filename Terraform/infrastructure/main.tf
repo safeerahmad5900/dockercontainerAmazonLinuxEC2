@@ -32,15 +32,16 @@ locals {
   prefix_main  = "${local.prefix}-${var.env}"
 }
 module "globalvars" {
-  source = "../../../globalvars"
+  source = "/home/ec2-user/environment/EC2-Docker/dockercontainerAmazonLinuxEC2/Terraform/modules/globalvars"
 }
 
+#Assignment1-Clo835-dev
 
 # Create First EC2/Webserver
 resource "aws_instance" "webapp" {
-  ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = lookup(var.type, var.env)
-  key_name      = aws_key_pair.web_key.key_name
+  ami                    = data.aws_ami.latest_amazon_linux.id
+  instance_type          = lookup(var.type, var.env)
+  key_name               = aws_key_pair.webappkey.key_name
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   lifecycle {
@@ -70,20 +71,20 @@ resource "aws_security_group" "web_sg" {
   vpc_id      = data.aws_vpc.main.id
 
   ingress {
-    description = "HTTP from everyone"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "HTTP from everyone"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
   ingress {
-    description = "SSH from everyone"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "SSH from everyone"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
