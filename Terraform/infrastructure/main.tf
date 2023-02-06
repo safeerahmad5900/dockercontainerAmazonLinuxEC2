@@ -69,16 +69,32 @@ resource "aws_security_group" "web_sg" {
   name        = "Webserver traffic Dockers/EC2"
   description = "Webserver traffic Dockers/EC2"
   vpc_id      = data.aws_vpc.main.id
-
-  ingress {
-    description      = "HTTP from everyone"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+ ingress {
+    description = "HTTP from blue"
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
+ ingress {
+    description = "HTTP from pink"
+    from_port   = 8082
+    to_port     = 8082
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  
+   ingress {
+    description = "HTTP from lime"
+    from_port   = 8083
+    to_port     = 8083
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+     ipv6_cidr_blocks = ["::/0"]
+  }
+  
   ingress {
     description      = "SSH from everyone"
     from_port        = 22
